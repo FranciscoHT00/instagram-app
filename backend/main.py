@@ -1,12 +1,19 @@
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 import uvicorn
-from routers import user
+from routers import user, instagram
 import models
+from contextlib import asynccontextmanager
+import httpx
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    async with httpx.AsyncClient() as client:
+        yield {'client': client}
 
-app = FastAPI()
+app = FastAPI(lifespan=lifespan)
 app.include_router(user.router)
+app.include_router(instagram.router)
 
 
 @app.get("/", include_in_schema=False)
