@@ -2,10 +2,10 @@ from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 import uvicorn
 from routers import user
+import models
 
 
 app = FastAPI()
-
 app.include_router(user.router)
 
 

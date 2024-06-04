@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, BigInteger
-from database import Base
+from database import Base, engine
 
 class Usuario(Base):
     __tablename__  = 'Usuario'
@@ -10,6 +10,8 @@ class Usuario(Base):
     contrasenia = Column(String)    
     telefono = Column(String)
     tipo = Column(Integer)
+    idInstagram = Column(String)
+    facebook_token = Column(String)
 
 class Concurso(Base):
     __tablename__ = 'Concurso'
@@ -21,3 +23,6 @@ class Concurso(Base):
     idPublicacion = Column(BigInteger)
     fechaInicio = Column(DateTime)
     fechaFinal = Column(DateTime)
+    
+    
+Base.metadata.create_all(bind=engine)
