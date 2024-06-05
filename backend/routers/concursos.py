@@ -64,7 +64,10 @@ async def ver_participantes(id_concurso: int, request: Request, db: db_dependenc
             lista_inicial = data["comments"]["data"]
             lista_final = set()
             for comentario in lista_inicial:
-                lista_final.add(comentario["id"])
+                req = client.build_request('GET', f"https://graph.facebook.com/v20.0/{comentario["id"]}?fields=from&access_token={usuario.facebook_token}")
+                r = await client.send(req)
+                data = r.json()
+                lista_final.add(data["from"]["username"])
             
             return {"lista_inicial": lista_inicial, "lista_final": lista_final}        
         elif concurso.tipo == 1:
