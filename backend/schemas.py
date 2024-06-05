@@ -17,9 +17,8 @@ class UsuarioActualizado(BaseModel):
     tipo: int = None
     
 class SchemaConcurso(BaseModel):
-    idUsuario: int
     nombre: str
     tipo: int
-    idPublicacion: Optional[int]
+    idPublicacion: Optional[int] = None
     fechaInicio: datetime = datetime.now
     fechaFinal: datetime = datetime.now
