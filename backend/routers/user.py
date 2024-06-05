@@ -59,6 +59,8 @@ async def login_usuario(usuario: Annotated[OAuth2PasswordRequestForm, Depends()]
 @router.get("/listar")
 async def listar_usuarios(db: db_dependency):
     result = db.query(models.Usuario).all()
+    if not result:
+        raise HTTPException(status_code=404, detail="No hay usuarios registrados.")
     return result  
 
 @router.get("/obtener")
