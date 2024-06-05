@@ -10,7 +10,7 @@ class Usuario(Base):
     contrasenia = Column(String)    
     telefono = Column(String)
     tipo = Column(Integer)
-    idInstagram = Column(String)
+    idInstagram = Column(BigInteger)
     facebook_token = Column(String)
 
 class Concurso(Base):
