@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, BigInteger
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, BigInteger, Boolean
 from database import Base, engine
 
 class Usuario(Base):
@@ -23,6 +23,17 @@ class Concurso(Base):
     idPublicacion = Column(BigInteger)
     fechaInicio = Column(DateTime)
     fechaFinal = Column(DateTime)
+    
+class Publicacion(Base):
+    __tablename__ = 'Publicacion'
+    
+    idPublicacion = Column(Integer, primary_key=True, autoincrement=True, index=True)
+    idUsuario = Column(Integer, ForeignKey("Usuario.idUsuario"))
+    urlImagen = Column(String)
+    texto = Column(String)
+    fecha = Column(DateTime)
+    publicada = Column(Boolean)
+    urlPublicacion = Column(String)
     
     
 Base.metadata.create_all(bind=engine)

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 import uvicorn
-from routers import user, instagram, concursos
+from routers import user, instagram, concursos, publicaciones
 import models
 from contextlib import asynccontextmanager
 import httpx
@@ -15,7 +15,7 @@ app = FastAPI(lifespan=lifespan)
 app.include_router(user.router)
 app.include_router(instagram.router)
 app.include_router(concursos.router)
-
+app.include_router(publicaciones.router)
 
 @app.get("/", include_in_schema=False)
 async def documentacion():

@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from typing import Optional
 
 class UsuarioBase(BaseModel):
@@ -20,5 +20,10 @@ class SchemaConcurso(BaseModel):
     nombre: str
     tipo: int
     idPublicacion: Optional[int] = None
-    fechaInicio: datetime = datetime.now
-    fechaFinal: datetime = datetime.now
+    fechaInicio: datetime = datetime.now(timezone.utc)
+    fechaFinal: datetime = datetime.now(timezone.utc)
+    
+class SchemaPublicacion(BaseModel):
+    urlImagen: str
+    texto: str
+    fecha: datetime = datetime.now(timezone.utc)
